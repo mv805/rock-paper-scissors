@@ -78,12 +78,12 @@ function game(gamesToPlay) {
             computerWins++;
         }
 
-        console.log(`
-        Players Hand: ${playersChoice}
-        Computers Hand: ${computersChoice}
-        Game ${i} result: ${currentGame} 
-        Player Wins:${playerWins} 
-        Computer Wins:${computerWins}`);
+        console.log(`Players Hand: ${playersChoice}`);
+        console.log(`Computers Hand: ${computersChoice}`);
+        console.log(`Game ${i} result: ${currentGame}`);
+        console.log(`Total Player Wins:${playerWins}`);
+        console.log(`Total Computer Wins:${computerWins}`);
+        console.log('---------------------------------------');
     }
 
     if (playerWins > computerWins) {
