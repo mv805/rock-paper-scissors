@@ -94,5 +94,3 @@ function game(gamesToPlay) {
         console.log("FINAL RESULT: You tied the computer!");
     }
 }
-
-game(3);
