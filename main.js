@@ -1,3 +1,5 @@
+let gameState = 'choose-hand';
+
 function computerPlay() {
 
     switch (getRandomInt(1, 4)) {
@@ -56,12 +58,12 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
-function getPlayerInput() {
+function getPlayerInput() {//remove when finished
     let inputChoice = prompt("Make a choice of hand... (Rock, paper, or scissors)");
     return inputChoice.toUpperCase();
 }
 
-function game(gamesToPlay) {
+function game5(gamesToPlay) {
 
     let playerWins = 0;
     let computerWins = 0;
