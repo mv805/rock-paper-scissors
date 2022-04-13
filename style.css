@@ -18,10 +18,6 @@ p {
     padding: 0;
 }
 
-img {
-    filter: invert(90%) sepia(19%) saturate(4426%) hue-rotate(304deg) brightness(135%) contrast(110%);
-}
-
 /*|| top banner*/
 .banner {
     height: 13vh;
@@ -88,8 +84,8 @@ play again button - 13%
 
 .hand-select>button {
     background-color: #133B5C;
-    height: 11vh;
-    width: 11vh;
+    height: 8vh;
+    width: 8vh;
     border: 3px solid #FCDAB7;
     border-radius: .5rem;
 }
@@ -98,27 +94,37 @@ play again button - 13%
     background-color: #1D2D50;
 }
 
-.hand-select img {
-    filter: invert(31%) sepia(31%) saturate(937%) hue-rotate(148deg) brightness(95%) contrast(93%);
+.rock-hand-hover:hover {
+    background-image: url('/images/rock-white.svg');
 }
 
-.hand-hover>img:hover {
-    filter: invert(90%) sepia(19%) saturate(4426%) hue-rotate(304deg) brightness(135%) contrast(110%);
+.paper-hand-hover:hover {
+    background-image: url('/images/paper-white.svg');
 }
 
-.rock-hand img {
-    max-height: 80%;
-    padding: 1vh 1vh;
+.scissor-hand-hover:hover {
+    background-image: url('/images/scissor-white.svg');
 }
 
-.paper-hand img {
-    max-height: 80%;
-    padding: 1vh 1.75vh;
+.rock-hand {
+    background-image: url('/images/rock-green.svg');
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.scissors-hand img {
-    max-height: 80%;
-    padding: 1vh 1.75vh;
+.paper-hand {
+    background-image: url('/images/paper-green.svg');
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.scissor-hand {
+    background-image: url('/images/scissor-green.svg');
+    background-size: 55%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /*|| results area*/
