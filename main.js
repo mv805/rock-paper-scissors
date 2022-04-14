@@ -2,12 +2,14 @@ let gameOver = false;
 let playerWins = 0;
 let computerWins = 0;
 let resultCondition;
-
 let playerSelection;
 let computerSelection;
 
 let playerHandSelectButtons = Array.from(document.querySelectorAll('.hand-select button'));
-let resultsArea = document.querySelector('.results-area');
+let resultsArea = document.querySelector('#results-area');
+let playerWinCounter = document.querySelector('#player-score');
+let computerWinCounter = document.querySelector('#cpu-score');
+let playAgainButton = document.querySelector('#play-again-button');
 
 const resultsText = document.createElement('div');
 resultsText.classList.add('results-text');
@@ -149,10 +151,24 @@ function runGameSimulation(e) {
         resultsBigNote.classList.add('tie-text');
         resultsBigNote.textContent = '---';
     }
-        //activate play again button
-
-        //remove the event listeners and turn off button graphics
-        toggleButtonColors(playerHandSelectButtons);
+    //update scoring
+    playerWinCounter.textContent = playerWins;
+    computerWinCounter.textContent = computerWins;
+    //check if there is a game winner and display results if so
+    if (playerWins === 3) {
+        resultsArea.removeChild(resultsText);
+        resultsArea.removeChild(resultsBigNote);
+        resultsArea.textContent("CONGRATULATIONS! YOU WIN!");
+    } else if (computerWins === 3) {
+        resultsArea.removeChild(resultsText);
+        resultsArea.removeChild(resultsBigNote);
+        resultsArea.textContent("SORRY YOU LOSE!");
+    }
+    //activate play again button
+    playAgainButton.classList.toggle('inactive-play-again-button');
+    playAgainButton.classList.toggle('active-play-again-button');
+    //remove the event listeners and turn off button graphics
+    toggleButtonColors(playerHandSelectButtons);
     highlightChosenHand(playerHandSelectButtons);
     removeButtonListeners(playerHandSelectButtons);
 
