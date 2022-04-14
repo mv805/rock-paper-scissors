@@ -1,4 +1,9 @@
-let gameState = 'choose-hand';
+let gameOver = false;
+let playerWins = 0;
+let computerWins = 0;
+let playerSelection;
+let playerHandSelectButtons = Array.from(document.querySelectorAll('.hand-select button'));
+
 
 function computerPlay() {
 
@@ -10,7 +15,7 @@ function computerPlay() {
             return "PAPER";
             break;
         case 3:
-            return "SCISSORS";
+            return "SCISSOR";
             break;
         default:
             return "INVALID"
@@ -37,19 +42,20 @@ function playRound(playerSelection, computerSelection) {
         scissors-paper
         scissors-scissors 
     */
+
     if (playerSelection === computerSelection) {
         return "Tie. No Winner";
     } else if (playerSelection === "ROCK" && computerSelection === "PAPER") {
         return "You Lose! Rock loses to Paper.";
-    } else if (playerSelection === "ROCK" && computerSelection === "SCISSORS") {
+    } else if (playerSelection === "ROCK" && computerSelection === "SCISSOR") {
         return "You Win! Rock beats Scissors.";
     } else if (playerSelection === "PAPER" && computerSelection === "ROCK") {
         return "You Win! Paper beats Rock.";
-    } else if (playerSelection === "PAPER" && computerSelection === "SCISSORS") {
+    } else if (playerSelection === "PAPER" && computerSelection === "SCISSOR") {
         return "You Lose! Scissors beats Paper.";
-    } else if (playerSelection === "SCISSORS" && computerSelection === "ROCK") {
+    } else if (playerSelection === "SCISSOR" && computerSelection === "ROCK") {
         return "You Lose! Rock beats Scissors.";
-    } else if (playerSelection === "SCISSORS" && computerSelection === "PAPER") {
+    } else if (playerSelection === "SCISSOR" && computerSelection === "PAPER") {
         return "You Win! Scissors beats Paper.";
     } else {
         return "Invalid Game";
@@ -57,17 +63,10 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
+function game() {
 
-function getPlayerInput() {//remove when finished
-    let inputChoice = prompt("Make a choice of hand... (Rock, paper, or scissors)");
-    return inputChoice.toUpperCase();
-}
-
-function game5(gamesToPlay) {
-
-    let playerWins = 0;
-    let computerWins = 0;
-
+    getPlayerSelection(playerHandSelectButtons);
+    /* 
     for (let i = 1; i <= gamesToPlay; i++) {
 
         let playersChoice = getPlayerInput();
@@ -95,4 +94,48 @@ function game5(gamesToPlay) {
     } else {
         console.log("FINAL RESULT: You tied the computer!");
     }
+    */
 }
+
+
+function getPlayerSelection(buttons) {
+    buttons.forEach(button => button.addEventListener('click', runGameSimulation));
+}
+
+function runGameSimulation(e) {
+    //set the players selection
+    playerSelection = e.target.id;
+
+    //run a game simulation with playerSelection
+    console.log(playRound(returnCorrectedHand(playerSelection), computerPlay()));
+
+    //display game results
+
+    //activate play again button
+    
+    //remove the event listeners and turn off button graphics
+    removeButtonListeners(playerHandSelectButtons);
+}
+
+function removeButtonListeners(buttons) {
+    buttons.forEach(button => button.removeEventListener('click', runGameSimulation));
+}
+
+function returnCorrectedHand(selection) {
+    switch (selection) {
+        case 'scissor-hand':
+            return 'SCISSOR';
+            break;
+        case 'rock-hand':
+            return 'ROCK';
+            break;
+        case 'paper-hand':
+            return 'PAPER';
+        break;
+        default:
+            return 'BAD INPUT';
+            break;
+    }
+}
+
+game();
