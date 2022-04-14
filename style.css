@@ -84,14 +84,18 @@ play again button - 13%
 
 .hand-select>button {
     background-color: #133B5C;
-    height: 8vh;
-    width: 8vh;
+    height: 11vh;
+    width: 11vh;
     border: 3px solid #FCDAB7;
     border-radius: .5rem;
 }
 
 .hand-select>button:active {
     background-color: #1D2D50;
+}
+
+.hand-select>button:hover {
+    cursor: pointer;
 }
 
 .rock-hand-hover:hover {
@@ -125,6 +129,10 @@ play again button - 13%
     background-size: 55%;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.inactive-button {
+    border-color: #1E5F74;
 }
 
 /*|| results area*/
