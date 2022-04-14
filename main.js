@@ -9,16 +9,16 @@ function computerPlay() {
 
     switch (getRandomInt(1, 4)) {
         case 1:
-            return "ROCK";
+            return 'rock';
             break;
         case 2:
-            return "PAPER";
+            return 'paper';
             break;
         case 3:
-            return "SCISSOR";
+            return 'scissor';
             break;
         default:
-            return "INVALID"
+            return 'INVALID'
             break;
     }
 }
@@ -45,17 +45,17 @@ function playRound(playerSelection, computerSelection) {
 
     if (playerSelection === computerSelection) {
         return "Tie. No Winner";
-    } else if (playerSelection === "ROCK" && computerSelection === "PAPER") {
+    } else if (playerSelection === "rock" && computerSelection === "paper") {
         return "You Lose! Rock loses to Paper.";
-    } else if (playerSelection === "ROCK" && computerSelection === "SCISSOR") {
+    } else if (playerSelection === "rock" && computerSelection === "scissor") {
         return "You Win! Rock beats Scissors.";
-    } else if (playerSelection === "PAPER" && computerSelection === "ROCK") {
+    } else if (playerSelection === "paper" && computerSelection === "rock") {
         return "You Win! Paper beats Rock.";
-    } else if (playerSelection === "PAPER" && computerSelection === "SCISSOR") {
+    } else if (playerSelection === "paper" && computerSelection === "scissor") {
         return "You Lose! Scissors beats Paper.";
-    } else if (playerSelection === "SCISSOR" && computerSelection === "ROCK") {
+    } else if (playerSelection === "scissor" && computerSelection === "rock") {
         return "You Lose! Rock beats Scissors.";
-    } else if (playerSelection === "SCISSOR" && computerSelection === "PAPER") {
+    } else if (playerSelection === "scissor" && computerSelection === "paper") {
         return "You Win! Scissors beats Paper.";
     } else {
         return "Invalid Game";
@@ -112,9 +112,11 @@ function runGameSimulation(e) {
     //display game results
 
     //activate play again button
-    
+
     //remove the event listeners and turn off button graphics
+    toggleButtonColors(playerHandSelectButtons);
     removeButtonListeners(playerHandSelectButtons);
+
 }
 
 function removeButtonListeners(buttons) {
@@ -124,18 +126,26 @@ function removeButtonListeners(buttons) {
 function returnCorrectedHand(selection) {
     switch (selection) {
         case 'scissor-hand':
-            return 'SCISSOR';
+            return 'scissor';
             break;
         case 'rock-hand':
-            return 'ROCK';
+            return 'rock';
             break;
         case 'paper-hand':
-            return 'PAPER';
+            return 'paper';
         break;
         default:
             return 'BAD INPUT';
             break;
     }
+}
+
+function toggleButtonColors(buttons){
+    buttons.forEach(button => {
+        button.classList.toggle('inactive-button');
+        button.classList.toggle('active-button');
+        button.classList.toggle(`${returnCorrectedHand(button.id)}-hand-hover`);
+    });
 }
 
 game();
