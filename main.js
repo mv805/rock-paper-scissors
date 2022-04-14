@@ -1,9 +1,17 @@
 let gameOver = false;
 let playerWins = 0;
 let computerWins = 0;
-let playerSelection;
-let playerHandSelectButtons = Array.from(document.querySelectorAll('.hand-select button'));
+let resultCondition;
 
+let playerSelection;
+let computerSelection;
+
+let playerHandSelectButtons = Array.from(document.querySelectorAll('.hand-select button'));
+let resultsArea = document.querySelector('.results-area');
+
+const resultsText = document.createElement('div');
+resultsText.classList.add('results-text');
+const resultsBigNote = document.createElement('div');
 
 function computerPlay() {
 
@@ -44,19 +52,32 @@ function playRound(playerSelection, computerSelection) {
     */
 
     if (playerSelection === computerSelection) {
+        resultCondition = 'tie';
         return "Tie. No Winner";
     } else if (playerSelection === "rock" && computerSelection === "paper") {
-        return "You Lose! Rock loses to Paper.";
+        computerWins++;
+        resultCondition = 'lose';
+        return "Your Rock loses to their Paper";
     } else if (playerSelection === "rock" && computerSelection === "scissor") {
-        return "You Win! Rock beats Scissors.";
+        playerWins++;
+        resultCondition = 'win';
+        return "Your Rock beats their Scissors";
     } else if (playerSelection === "paper" && computerSelection === "rock") {
-        return "You Win! Paper beats Rock.";
+        playerWins++;
+        resultCondition = 'win';
+        return "Your Paper beats their Rock";
     } else if (playerSelection === "paper" && computerSelection === "scissor") {
-        return "You Lose! Scissors beats Paper.";
+        computerWins++;
+        resultCondition = 'lose';
+        return "Your Paper loses to their Scissors";
     } else if (playerSelection === "scissor" && computerSelection === "rock") {
-        return "You Lose! Rock beats Scissors.";
+        computerWins++;
+        resultCondition = 'lose';
+        return "Your scissors loses to their rock";
     } else if (playerSelection === "scissor" && computerSelection === "paper") {
-        return "You Win! Scissors beats Paper.";
+        playerWins++;
+        resultCondition = 'win';
+        return "Your scissors beats their paper";
     } else {
         return "Invalid Game";
     }
@@ -103,18 +124,36 @@ function getPlayerSelection(buttons) {
 }
 
 function runGameSimulation(e) {
-    //set the players selection
-    playerSelection = e.target.id;
-
+    //set the players and computer selection
+    playerSelection = returnCorrectedHand(e.target.id);
+    computerSelection = computerPlay();
     //run a game simulation with playerSelection
-    console.log(playRound(returnCorrectedHand(playerSelection), computerPlay()));
-
+    let gameResults = playRound(playerSelection, computerSelection);
+    //remove choose your weapon text
+    resultsArea.textContent = ` `;
     //display game results
+    resultsArea.appendChild(resultsText);
+    resultsText.textContent = `${gameResults.toUpperCase()}`;
+    resultsArea.appendChild(resultsBigNote);
 
-    //activate play again button
+    if (resultCondition === 'win') {
+        resultsBigNote.className = '';
+        resultsBigNote.classList.add('win-text');
+        resultsBigNote.textContent = 'YOU WIN!';
+    } else if (resultCondition === 'lose') {
+        resultsBigNote.className = '';
+        resultsBigNote.classList.add('lose-text');
+        resultsBigNote.textContent = 'YOU LOSE!';
+    } else {
+        resultsBigNote.className = '';
+        resultsBigNote.classList.add('tie-text');
+        resultsBigNote.textContent = '---';
+    }
+        //activate play again button
 
-    //remove the event listeners and turn off button graphics
-    toggleButtonColors(playerHandSelectButtons);
+        //remove the event listeners and turn off button graphics
+        toggleButtonColors(playerHandSelectButtons);
+    highlightChosenHand(playerHandSelectButtons);
     removeButtonListeners(playerHandSelectButtons);
 
 }
@@ -133,18 +172,27 @@ function returnCorrectedHand(selection) {
             break;
         case 'paper-hand':
             return 'paper';
-        break;
+            break;
         default:
             return 'BAD INPUT';
             break;
     }
 }
 
-function toggleButtonColors(buttons){
+function toggleButtonColors(buttons) {
     buttons.forEach(button => {
         button.classList.toggle('inactive-button');
         button.classList.toggle('active-button');
         button.classList.toggle(`${returnCorrectedHand(button.id)}-hand-hover`);
+    });
+}
+
+function highlightChosenHand(buttons) {
+    buttons.forEach(button => {
+        if (returnCorrectedHand(button.id) === playerSelection) {
+            button.classList.toggle('chosen-button');
+            button.style.backgroundImage = `url('/images/${returnCorrectedHand(button.id)}-white.svg')`;
+        }
     });
 }
 
