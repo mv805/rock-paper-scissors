@@ -82,32 +82,19 @@ play again button - 13%
     margin: 5% 5%;
 }
 
-.hand-select>button {
-    background-color: #133B5C;
-    height: 11vh;
-    width: 11vh;
-    border: 3px solid #FCDAB7;
-    border-radius: .5rem;
-}
-
-.hand-select>button:active {
-    background-color: #1D2D50;
-}
-
-.hand-select>button:hover {
-    cursor: pointer;
-}
-
 .rock-hand-hover:hover {
     background-image: url('/images/rock-white.svg');
+    cursor: pointer;
 }
 
 .paper-hand-hover:hover {
     background-image: url('/images/paper-white.svg');
+    cursor: pointer;
 }
 
 .scissor-hand-hover:hover {
     background-image: url('/images/scissor-white.svg');
+    cursor: pointer;
 }
 
 .rock-hand {
@@ -130,9 +117,23 @@ play again button - 13%
     background-position: center;
     background-repeat: no-repeat;
 }
+.active-button {
+    border: 3px solid #FCDAB7;
+    background-color: #133B5C;
+    height: 11vh;
+    width: 11vh;
+    border-radius: .5rem;    
+}
 
+.active-button:hover {
+    background-color: #1D2D50;
+}
 .inactive-button {
-    border-color: #1E5F74;
+    border: 3px solid #1E5F74;
+    background-color: #133B5C;
+    height: 11vh;
+    width: 11vh;
+    border-radius: .5rem;
 }
 
 /*|| results area*/
