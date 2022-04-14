@@ -22,26 +22,30 @@
         </div>
         <div class="game-screen">
             <div class="hand-select">
-                <button class="rock-hand rock-hand-hover active-button" id="rock-hand"></button>
-                <button class="paper-hand paper-hand-hover active-button" id="paper-hand"></button>
-                <button class="scissor-hand scissor-hand-hover active-button" id="scissor-hand"></button>
+                <button class="rock-hand rock-hand-hover active-button"
+                    id="rock-hand"></button>
+                <button class="paper-hand paper-hand-hover active-button"
+                    id="paper-hand"></button>
+                <button class="scissor-hand scissor-hand-hover active-button"
+                    id="scissor-hand"></button>
             </div>
-            <div class="results-area">
+            <div class="results-area" id="results-area">
                 CHOOSE YOUR WEAPON
             </div>
             <div class="rules-statement-3of5">BEST 3 OUT OF 5 WINS</div>
             <div class="score-area">
                 <div class="player-wins">
                     <p>PLAYER WINS:</p>
-                    <p>0</p>
+                    <p id="player-score">0</p>
                 </div>
                 <div class="cpu-wins">
                     <p>CPU WINS:</p>
-                    <p>0</p>
+                    <p id="cpu-score">0</p>
                 </div>
             </div>
             <div class="play-again">
-                <button class="play-again-button">PLAY AGAIN</button>
+                <button class="inactive-play-again-button"
+                    id="play-again-button">PLAY AGAIN</button>
             </div>
         </div>
     </body>
