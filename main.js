@@ -250,10 +250,10 @@ function toggleHighlightChosenHand(buttons, on) {
         if (returnCorrectedHand(button.id) === playerSelection) {
             if (on === true) {
                 button.classList.add('chosen-button');
-                button.style.backgroundImage = `url('/images/${returnCorrectedHand(button.id)}-white.svg')`;
+                button.style.backgroundImage = `url('images/${returnCorrectedHand(button.id)}-white.svg')`;
             } else if (on === false) {
                 button.classList.remove('chosen-button');
-                button.style.backgroundImage = `url('/images/${returnCorrectedHand(button.id)}-green.svg')`;
+                button.style.backgroundImage = `url('images/${returnCorrectedHand(button.id)}-green.svg')`;
             }
         }
     });
