@@ -4,6 +4,7 @@ let computerWins = 0;
 let resultCondition;
 let playerSelection;
 let computerSelection;
+let gameResults;
 
 let playerHandSelectButtons = Array.from(document.querySelectorAll('.hand-select button'));
 let resultsArea = document.querySelector('#results-area');
@@ -87,8 +88,10 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
+
     setButtonsForNewGame(playerHandSelectButtons);
-    playAgainButton.addEventListener('click', startNewGame);
+    
+
     /* 
     for (let i = 1; i <= gamesToPlay; i++) {
 
@@ -130,6 +133,13 @@ function startNewGame() {
         toggleHandButtonColors(playerHandSelectButtons, true);
         toggleHighlightChosenHand(playerHandSelectButtons, false);
         togglePlayAgainButtonColors(playAgainButton, false);
+        toggleChooseWeaponText(true);
+        resultCondition = undefined;
+        playerSelection = undefined;
+        computerSelection = undefined;
+        setButtonsForNewGame(playerHandSelectButtons);
+    } else if (gameOver){
+        location.reload();
     }
 }
 
@@ -139,13 +149,9 @@ function runGameSimulation(e) {
     playerSelection = returnCorrectedHand(e.target.id);
     computerSelection = computerPlay();
     //run a game simulation with playerSelection
-    let gameResults = playRound(playerSelection, computerSelection);
+    gameResults = playRound(playerSelection, computerSelection);
     //remove choose your weapon text
-    resultsArea.textContent = ` `;
-    //display game results
-    resultsArea.appendChild(resultsText);
-    resultsText.textContent = `${gameResults.toUpperCase()}`;
-    resultsArea.appendChild(resultsBigNote);
+    toggleChooseWeaponText(false);
 
     if (resultCondition === 'win') {
         resultsBigNote.className = '';
@@ -167,11 +173,13 @@ function runGameSimulation(e) {
     if (playerWins === 3) {
         resultsArea.removeChild(resultsText);
         resultsArea.removeChild(resultsBigNote);
-        resultsArea.textContent("CONGRATULATIONS! YOU WIN!");
+        resultsArea.textContent = "CONGRATULATIONS! YOU WIN!";
+        gameOver = true;
     } else if (computerWins === 3) {
         resultsArea.removeChild(resultsText);
         resultsArea.removeChild(resultsBigNote);
-        resultsArea.textContent("SORRY YOU LOSE!");
+        resultsArea.textContent = "SORRY YOU LOSE!";
+        gameOver = true;
     }
     //activate play again button
     togglePlayAgainButtonColors(playAgainButton, true);
@@ -179,6 +187,7 @@ function runGameSimulation(e) {
     toggleHandButtonColors(playerHandSelectButtons, false);
     toggleHighlightChosenHand(playerHandSelectButtons, true);
     playerHandSelectButtons.forEach(button => button.removeEventListener('click', runGameSimulation));
+    playAgainButton.addEventListener('click', startNewGame);
 
 }
 function togglePlayAgainButtonColors(button, status) {
@@ -190,7 +199,17 @@ function togglePlayAgainButtonColors(button, status) {
         button.classList.add('inactive-play-again-button');
     }
 }
-
+function toggleChooseWeaponText(status) {
+    if (status === false) {
+        resultsArea.appendChild(resultsText);
+        resultsText.textContent = `${gameResults.toUpperCase()}`;
+        resultsArea.appendChild(resultsBigNote);
+    } else if (status === true) {
+        resultsArea.removeChild(resultsText);
+        resultsText.textContent = `CHOOSE YOUR WEAPON`;
+        resultsArea.removeChild(resultsBigNote);
+    }
+}
 
 function returnCorrectedHand(selection) {
     switch (selection) {
