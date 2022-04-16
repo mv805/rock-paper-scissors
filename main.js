@@ -87,8 +87,8 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-
-    getPlayerSelection(playerHandSelectButtons);
+    setButtonsForNewGame(playerHandSelectButtons);
+    playAgainButton.addEventListener('click', startNewGame);
     /* 
     for (let i = 1; i <= gamesToPlay; i++) {
 
@@ -120,12 +120,21 @@ function game() {
     */
 }
 
-
-function getPlayerSelection(buttons) {
+function setButtonsForNewGame(buttons) {
     buttons.forEach(button => button.addEventListener('click', runGameSimulation));
 }
 
+function startNewGame() {
+    if (!gameOver) {
+        console.log('started a new game');
+        toggleHandButtonColors(playerHandSelectButtons, true);
+        toggleHighlightChosenHand(playerHandSelectButtons, false);
+        togglePlayAgainButtonColors(playAgainButton, false);
+    }
+}
+
 function runGameSimulation(e) {
+
     //set the players and computer selection
     playerSelection = returnCorrectedHand(e.target.id);
     computerSelection = computerPlay();
@@ -165,18 +174,23 @@ function runGameSimulation(e) {
         resultsArea.textContent("SORRY YOU LOSE!");
     }
     //activate play again button
-    playAgainButton.classList.toggle('inactive-play-again-button');
-    playAgainButton.classList.toggle('active-play-again-button');
+    togglePlayAgainButtonColors(playAgainButton, true);
     //remove the event listeners and turn off button graphics
-    toggleButtonColors(playerHandSelectButtons);
-    highlightChosenHand(playerHandSelectButtons);
-    removeButtonListeners(playerHandSelectButtons);
+    toggleHandButtonColors(playerHandSelectButtons, false);
+    toggleHighlightChosenHand(playerHandSelectButtons, true);
+    playerHandSelectButtons.forEach(button => button.removeEventListener('click', runGameSimulation));
 
 }
-
-function removeButtonListeners(buttons) {
-    buttons.forEach(button => button.removeEventListener('click', runGameSimulation));
+function togglePlayAgainButtonColors(button, status) {
+    if (status === true) {
+        button.classList.add('active-play-again-button');
+        button.classList.remove('inactive-play-again-button');
+    } else if (status === false) {
+        button.classList.remove('active-play-again-button');
+        button.classList.add('inactive-play-again-button');
+    }
 }
+
 
 function returnCorrectedHand(selection) {
     switch (selection) {
@@ -195,19 +209,33 @@ function returnCorrectedHand(selection) {
     }
 }
 
-function toggleButtonColors(buttons) {
-    buttons.forEach(button => {
-        button.classList.toggle('inactive-button');
-        button.classList.toggle('active-button');
-        button.classList.toggle(`${returnCorrectedHand(button.id)}-hand-hover`);
-    });
+function toggleHandButtonColors(buttons, status) {
+    if (status === true) {
+        buttons.forEach(button => {
+            button.classList.remove('inactive-button');
+            button.classList.add('active-button');
+            button.classList.add(`${returnCorrectedHand(button.id)}-hand-hover`);
+        });
+    } else if (status === false) {
+        buttons.forEach(button => {
+            button.classList.add('inactive-button');
+            button.classList.remove('active-button');
+            button.classList.remove(`${returnCorrectedHand(button.id)}-hand-hover`);
+        });
+    }
+
 }
 
-function highlightChosenHand(buttons) {
+function toggleHighlightChosenHand(buttons, on) {
     buttons.forEach(button => {
         if (returnCorrectedHand(button.id) === playerSelection) {
-            button.classList.toggle('chosen-button');
-            button.style.backgroundImage = `url('/images/${returnCorrectedHand(button.id)}-white.svg')`;
+            if (on === true) {
+                button.classList.add('chosen-button');
+                button.style.backgroundImage = `url('/images/${returnCorrectedHand(button.id)}-white.svg')`;
+            } else if (on === false) {
+                button.classList.remove('chosen-button');
+                button.style.backgroundImage = `url('/images/${returnCorrectedHand(button.id)}-green.svg')`;
+            }
         }
     });
 }
