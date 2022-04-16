@@ -4,14 +4,56 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="./main.js"></script>
+        <script src="./main.js" defer></script>
         <title>Rock Paper Scissors</title>
         <link rel="stylesheet" href="style.css">
-        </style>
     </head>
 
     <body>
-
+        <div class="banner">
+            <div class="banner-text">
+                ROCK PAPER SCISSORS
+            </div>
+            <div class="banner-symbols">
+                <img src="images/rock-white.svg" alt="">
+                <img src="images/paper-white.svg" alt="">
+                <img src="images/scissor-white.svg" alt="">
+            </div>
+        </div>
+        <div class="game-screen">
+            <div class="hand-select">
+                <button class="rock-hand rock-hand-hover active-button"
+                    id="rock-hand"></button>
+                <button class="paper-hand paper-hand-hover active-button"
+                    id="paper-hand"></button>
+                <button class="scissor-hand scissor-hand-hover active-button"
+                    id="scissor-hand"></button>
+            </div>
+            <div class="results-area" id="results-area">
+                CHOOSE YOUR WEAPON
+            </div>
+            <div class="rules-statement-3of5">BEST 3 OUT OF 5 WINS</div>
+            <div class="score-area">
+                <div class="player-wins">
+                    <p>PLAYER WINS:</p>
+                    <p id="player-score">0</p>
+                </div>
+                <div class="cpu-wins">
+                    <p>CPU WINS:</p>
+                    <p id="cpu-score">0</p>
+                </div>
+            </div>
+            <div class="play-again">
+                <button class="inactive-play-again-button"
+                    id="play-again-button">PLAY AGAIN</button>
+            </div>
+        </div>
     </body>
+    <footer>
+        Created by <a href="#">Matt Villa</a><br>
+        Images credit <a
+            href="https://www.vecteezy.com/vector-art/3027817-rock-paper-scissors-hand-gesture">Royce
+            Nicdao</a>
+    </footer>
 
 </html>

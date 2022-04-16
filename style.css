@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+
+body {
+    color: #FCDAB7;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #1D2D50;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/*|| top banner*/
+.banner {
+    height: 13vh;
+    width: 100vw;
+    margin: 2vh;
+    text-align: center;
+    background-color: #1E5F74;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.banner-text {
+    font-weight: 700;
+    font-size: 3vh;
+}
+
+.banner-symbols img {
+    max-height: 100%;
+}
+
+.banner-symbols {
+    width: 100vw;
+    height: 30%;
+
+}
+
+/*|| game screen*/
+.game-screen {
+    background-color: #133B5C;
+    height: 75vh;
+    max-width: 800px;
+    width: 85vw;
+    border: 2px solid #1E5F74;
+    border-radius: 13px;
+    box-shadow: 0px 4px 5px 3px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* 
+hand select - 20%
+results area - 30%
+rules statement - ?% (~ 7%)
+score area- 25%
+play again button - 13%
+
+*/
+/*|| hand-select*/
+.hand-select {
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    align-items: center;
+    height: 15%;
+    width: 100%;
+    margin: 5% 5%;
+}
+
+.rock-hand-hover:hover {
+    background-image: url('/images/rock-white.svg');
+    cursor: pointer;
+}
+
+.paper-hand-hover:hover {
+    background-image: url('/images/paper-white.svg');
+    cursor: pointer;
+}
+
+.scissor-hand-hover:hover {
+    background-image: url('/images/scissor-white.svg');
+    cursor: pointer;
+}
+
+.rock-hand {
+    background-image: url('/images/rock-green.svg');
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.paper-hand {
+    background-image: url('/images/paper-green.svg');
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.scissor-hand {
+    background-image: url('/images/scissor-green.svg');
+    background-size: 55%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.active-button {
+    border: 3px solid #FCDAB7;
+    background-color: #133B5C;
+    height: 11vh;
+    width: 11vh;
+    border-radius: .5rem;
+}
+
+.active-button:hover {
+    background-color: #1D2D50;
+}
+
+.inactive-button {
+    border: 3px solid #1E5F74;
+    background-color: #133B5C;
+    height: 11vh;
+    width: 11vh;
+    border-radius: .5rem;
+}
+
+.chosen-button {
+    border: 3px solid #FCDAB7;
+
+}
+
+/*|| results area*/
+.results-area {
+    height: 30%;
+    width: 90%;
+    border: 2px solid #1E5F74;
+    border-radius: 13px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.results-text {
+    color: #FCDAB7;
+    width: 70%;
+    word-wrap: break-word;
+}
+
+.win-text {
+    color: #259759;
+}
+
+.lose-text {
+    color: #b12d2d;
+}
+
+.tie-text {
+    color: #838383;
+}
+
+/*|| rules statement*/
+.rules-statement-3of5 {
+    width: 100%;
+    padding: 1% 0;
+    text-align: center;
+}
+
+/*|| score area*/
+.score-area {
+    width: 100%;
+    height: 25%;
+    background-color: #133B5C;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    align-items: center;
+}
+
+.score-area>div {
+    height: 15vh;
+    width: 15vh;
+    background-color: #1D2D50;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-wins p:first-of-type,
+.cpu-wins p:first-of-type {
+    font-size: 1.5vh;
+    text-align: center;
+}
+
+.player-wins p:nth-of-type(2),
+.cpu-wins p:nth-of-type(2) {
+    font-size: 10vh;
+    margin: auto;
+}
+
+/*|| play again button*/
+.play-again {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 15%;
+}
+
+.inactive-play-again-button {
+    height: 80%;
+    width: 70%;
+    max-width: 300px;
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    background-color: #1E5F74;
+    border-style: none;
+    border-radius: .5rem;
+    color: #133B5C;
+    border: .5vw solid #1E5F74;
+    padding: 0 2px;
+    margin: 0;
+}
+
+.active-play-again-button {
+    height: 80%;
+    width: 70%;
+    max-width: 300px;
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    background-color: #1E5F74;
+    border-style: none;
+    border-radius: .5rem;
+    color: #FCDAB7;
+    border: .5vw solid #FCDAB7;
+    padding: 0 2px;
+    margin: 0;
+}
+
+/*|| footer*/
+
+footer {
+    color: #1E5F74;
+    margin-top: auto;
+    text-align: center;
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+a {
+    color: #3492b1;
+    text-decoration: none;
+}
+
+a:hover {
+    color: aliceblue;
+}
