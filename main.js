@@ -35,9 +35,11 @@ function computerPlay() {
 }
 
 function getRandomInt(min, max) {
+    //The maximum is exclusive and the minimum is inclusive
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min) + min); 
+    
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -91,36 +93,6 @@ function game() {
 
     setButtonsForNewGame(playerHandSelectButtons);
     
-
-    /* 
-    for (let i = 1; i <= gamesToPlay; i++) {
-
-        let playersChoice = getPlayerInput();
-        let computersChoice = computerPlay();
-        let currentGame = playRound(playersChoice, computersChoice);
-
-        if (currentGame.charAt(4) === 'W') {
-            playerWins++;
-        } else if (currentGame.charAt(4) === 'L') {
-            computerWins++;
-        }
-
-        console.log(`Players Hand: ${playersChoice}`);
-        console.log(`Computers Hand: ${computersChoice}`);
-        console.log(`Game ${i} result: ${currentGame}`);
-        console.log(`Total Player Wins:${playerWins}`);
-        console.log(`Total Computer Wins:${computerWins}`);
-        console.log('---------------------------------------');
-    }
-
-    if (playerWins > computerWins) {
-        console.log("FINAL RESULT: You won more games than the computer!");
-    } else if (computerWins > playerWins) {
-        console.log("FINAL RESULT: You lost more games than the computer!");
-    } else {
-        console.log("FINAL RESULT: You tied the computer!");
-    }
-    */
 }
 
 function setButtonsForNewGame(buttons) {
@@ -145,13 +117,11 @@ function startNewGame() {
 
 function runGameSimulation(e) {
 
-    //set the players and computer selection
     playerSelection = returnCorrectedHand(e.target.id);
     computerSelection = computerPlay();
-    //run a game simulation with playerSelection
     gameResults = playRound(playerSelection, computerSelection);
-    //remove choose your weapon text
     toggleChooseWeaponText(false);
+    toggleResultsText(true);
 
     if (resultCondition === 'win') {
         resultsBigNote.className = '';
@@ -166,24 +136,22 @@ function runGameSimulation(e) {
         resultsBigNote.classList.add('tie-text');
         resultsBigNote.textContent = '---';
     }
-    //update scoring
     playerWinCounter.textContent = playerWins;
     computerWinCounter.textContent = computerWins;
-    //check if there is a game winner and display results if so
     if (playerWins === 3) {
         resultsArea.removeChild(resultsText);
         resultsArea.removeChild(resultsBigNote);
         resultsArea.textContent = "CONGRATULATIONS! YOU WIN!";
+        resultsArea.style.backgroundColor = '#35853a';
         gameOver = true;
     } else if (computerWins === 3) {
         resultsArea.removeChild(resultsText);
         resultsArea.removeChild(resultsBigNote);
         resultsArea.textContent = "SORRY YOU LOSE!";
+        resultsArea.style.backgroundColor = '#8a292b';
         gameOver = true;
     }
-    //activate play again button
     togglePlayAgainButtonColors(playAgainButton, true);
-    //remove the event listeners and turn off button graphics
     toggleHandButtonColors(playerHandSelectButtons, false);
     toggleHighlightChosenHand(playerHandSelectButtons, true);
     playerHandSelectButtons.forEach(button => button.removeEventListener('click', runGameSimulation));
@@ -199,15 +167,22 @@ function togglePlayAgainButtonColors(button, status) {
         button.classList.add('inactive-play-again-button');
     }
 }
-function toggleChooseWeaponText(status) {
-    if (status === false) {
+function toggleResultsText(status) {
+    if (status === true) {
         resultsArea.appendChild(resultsText);
         resultsText.textContent = `${gameResults.toUpperCase()}`;
         resultsArea.appendChild(resultsBigNote);
-    } else if (status === true) {
+    } else if (status === false) {
         resultsArea.removeChild(resultsText);
-        resultsText.textContent = `CHOOSE YOUR WEAPON`;
         resultsArea.removeChild(resultsBigNote);
+    }
+}
+
+function toggleChooseWeaponText(status) {
+    if (status === false) {
+        resultsArea.textContent = '';
+    } else if (status === true) {
+        resultsArea.textContent = `CHOOSE YOUR WEAPON`;
     }
 }
 
