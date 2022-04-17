@@ -38,8 +38,8 @@ function getRandomInt(min, max) {
     //The maximum is exclusive and the minimum is inclusive
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); 
-    
+    return Math.floor(Math.random() * (max - min) + min);
+
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -92,7 +92,7 @@ function playRound(playerSelection, computerSelection) {
 function game() {
 
     setButtonsForNewGame(playerHandSelectButtons);
-    
+
 }
 
 function setButtonsForNewGame(buttons) {
@@ -101,18 +101,28 @@ function setButtonsForNewGame(buttons) {
 
 function startNewGame() {
     if (!gameOver) {
-        console.log('started a new game');
-        toggleHandButtonColors(playerHandSelectButtons, true);
-        toggleHighlightChosenHand(playerHandSelectButtons, false);
-        togglePlayAgainButtonColors(playAgainButton, false);
-        toggleChooseWeaponText(true);
-        resultCondition = undefined;
-        playerSelection = undefined;
-        computerSelection = undefined;
+        prepareNewGame();
         setButtonsForNewGame(playerHandSelectButtons);
-    } else if (gameOver){
-        location.reload();
+    } else if (gameOver) {
+        playerWins = 0;
+        computerWins = 0;
+        gameOver = false;
+        playerWinCounter.textContent = playerWins;
+        computerWinCounter.textContent = computerWins;
+        resultsArea.style.backgroundColor = '#133B5C';
+        prepareNewGame();
+        setButtonsForNewGame(playerHandSelectButtons);
     }
+}
+function prepareNewGame() {
+    console.log('started a new game');
+    toggleHandButtonColors(playerHandSelectButtons, true);
+    toggleHighlightChosenHand(playerHandSelectButtons, false);
+    togglePlayAgainButtonColors(playAgainButton, false);
+    toggleChooseWeaponText(true);
+    resultCondition = undefined;
+    playerSelection = undefined;
+    computerSelection = undefined;
 }
 
 function runGameSimulation(e) {
